@@ -4,6 +4,8 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:quiz_app/widget/widget_candidates.dart';
 
+import 'screen_result.dart';
+
 class QuizScreen extends StatefulWidget {
   final List<Quiz> quizs;
   QuizScreen({this.quizs});
@@ -100,14 +102,23 @@ class _QuizScreenState extends State<QuizScreen> {
                     onPressed: _answer[_currenIndex] == -1
                         ? null
                         : () {
-                            if (_currenIndex == widget.quizs.length - 1) {
-                            } else {
-                              // 정답을 맞췄기때문에 넘어가면서 기존 변수들 초기화 하고 Index는 1추가
-                              _answerState = [false, false, false, false];
-                              _currenIndex += 1;
-                              // 다음 문제로 넘어감
-                              _controller.next();
-                            }
+                            setState(() {
+                              if (_currenIndex == widget.quizs.length - 1) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ResultScreen(
+                                              answers: _answer,
+                                              quizs: widget.quizs,
+                                            )));
+                              } else {
+                                // 정답을 맞췄기때문에 넘어가면서 기존 변수들 초기화 하고 Index는 1추가
+                                _answerState = [false, false, false, false];
+                                _currenIndex += 1;
+                                // 다음 문제로 넘어감
+                                _controller.next();
+                              }
+                            });
                           },
                   ),
                 ),
