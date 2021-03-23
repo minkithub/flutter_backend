@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:simplenote/pages/signin_page.dart';
 import 'package:simplenote/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:simplenote/widgets/error_dialog.dart';

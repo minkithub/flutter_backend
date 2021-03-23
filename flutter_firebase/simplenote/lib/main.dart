@@ -5,6 +5,7 @@ import 'package:simplenote/pages/home_page.dart';
 import 'package:simplenote/pages/note_page.dart';
 import 'package:simplenote/pages/signup_page.dart';
 import 'package:simplenote/providers/auth_provider.dart';
+import 'package:simplenote/providers/note_provider.dart';
 import 'pages/signin_page.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebaseAuth;
 
@@ -34,6 +35,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<AuthProvider>(
           create: (context) => AuthProvider(),
+        ),
+        ChangeNotifierProvider<NoteList>(
+          create: (context) => NoteList(),
         )
       ],
       child: MaterialApp(
