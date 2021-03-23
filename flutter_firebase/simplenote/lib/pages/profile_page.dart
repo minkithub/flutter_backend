@@ -3,14 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:simplenote/providers/auth_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebaseAuth;
 
-class NotesPage extends StatefulWidget {
-  static const String routeName = 'note-page';
+class ProfilePage extends StatefulWidget {
+  static const String routeName = 'profile-page';
 
   @override
-  _NotesPageState createState() => _NotesPageState();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _NotesPageState extends State<NotesPage> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     // user.uid를 provider를 이용해 쉽게 접근핧 수 있다.
@@ -19,10 +19,10 @@ class _NotesPageState extends State<NotesPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notes'),
+        title: Text('Profile'),
       ),
       body: Center(
-        child: Text('Notes'),
+        child: Text('Profile'),
       ),
     );
   }

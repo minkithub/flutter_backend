@@ -15,9 +15,8 @@ class User extends Equatable {
         id: userDoc.id, name: userData['name'], email: userData['email']);
   }
 
-  Map<String, dynamic> toJson() {
-    return {'id': id, 'name': name, 'email': email};
-  }
+  @override
+  bool get stringify => true;
 
   @override
   // []안의 세 변수가 같으면 같은 변수라고 취급

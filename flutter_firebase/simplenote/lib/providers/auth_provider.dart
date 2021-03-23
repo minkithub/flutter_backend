@@ -59,6 +59,7 @@ class AuthProvider extends ChangeNotifier {
     } catch (e) {
       state = state.copywith(loading: false);
       notifyListeners();
+      rethrow;
     }
   }
 

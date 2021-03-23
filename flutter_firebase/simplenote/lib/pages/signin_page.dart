@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simplenote/pages/signup_page.dart';
 import 'package:provider/provider.dart';
 import 'package:simplenote/providers/auth_provider.dart';
+import 'package:simplenote/widgets/error_dialog.dart';
 
 class SigninPage extends StatefulWidget {
   static const String routeName = 'signin-page';
@@ -33,7 +34,7 @@ class _SigninPageState extends State<SigninPage> {
           .read<AuthProvider>()
           .signIn(email: _email, password: _passward);
     } catch (e) {
-      print(e);
+      errorDialog(context, e);
     }
   }
 
