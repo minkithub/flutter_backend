@@ -27,11 +27,60 @@ class NoteListState extends Equatable {
 
 class NoteList extends ChangeNotifier {
   NoteListState state = NoteListState(loading: false, notes: []);
+  bool _hasNextDocs = true;
+
+  bool get hasNextDocs => _hasNextDocs;
 
   void handleError(Exception e) {
     print(e);
     state = state.copywith(loading: false);
     notifyListeners();
+  }
+
+  Future<void> getNotes(String userId, int limit) async {
+    state = state.copywith(loading: true);
+    notifyListeners();
+
+    try {
+      QuerySnapshot userNotesSnapshot;
+      DocumentSnapshot startAfterDoc;
+
+      if (state.notes.isNotEmpty) {
+        Note n = state.notes.last;
+        startAfterDoc =
+            await notesRef.doc(userId).collection('userNotes').doc(n.id).get();
+      } else {
+        startAfterDoc = null;
+      }
+
+      final refNotes = notesRef
+          .doc(userId)
+          .collection('userNotes')
+          .orderBy('timestamp', descending: true)
+          .limit(limit);
+
+      if (startAfterDoc == null) {
+        // 마지막에 get을 해야 데이터가 얻어짐
+        userNotesSnapshot = await refNotes.get();
+      } else {
+        userNotesSnapshot =
+            await refNotes.startAfterDocument(startAfterDoc).get();
+      }
+
+      List<Note> notes = userNotesSnapshot.docs.map((noteDoc) {
+        return Note.fromDoc(noteDoc);
+      }).toList();
+
+      if (userNotesSnapshot.docs.length < limit) {
+        _hasNextDocs = false;
+      }
+
+      state = state.copywith(loading: false, notes: [...state.notes, ...notes]);
+      notifyListeners();
+    } catch (e) {
+      handleError(e);
+      rethrow;
+    }
   }
 
   // note list 읽어오기
@@ -58,6 +107,31 @@ class NoteList extends ChangeNotifier {
     }
   }
 
+  // 서치타입 1 : res를 state에 저장하지 않고 그냥 return
+  Future<List<QuerySnapshot>> searchNotes(
+      String userId, String searchTerm) async {
+    try {
+      final snapshotOne = notesRef
+          .doc(userId)
+          .collection('userNotes')
+          .where('title', isGreaterThanOrEqualTo: searchTerm)
+          .where('title', isLessThanOrEqualTo: searchTerm + 'z');
+
+      final snapshotTwo = notesRef
+          .doc(userId)
+          .collection('userNotes')
+          .where('desc', isGreaterThanOrEqualTo: searchTerm)
+          .where('desc', isLessThanOrEqualTo: searchTerm + 'z');
+
+      final userNotesSnapshot =
+          await Future.wait([snapshotOne.get(), snapshotTwo.get()]);
+
+      return userNotesSnapshot;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   // 새로운 note 만들기
   Future<void> addNote(Note newNote) async {
     state = state.copywith(loading: false);
@@ -76,6 +150,7 @@ class NoteList extends ChangeNotifier {
           id: docRef.id,
           title: newNote.title,
           desc: newNote.desc,
+          noteOwnerId: newNote.noteOwnerId,
           timestamp: newNote.timestamp);
 
       state = state.copywith(loading: false, notes: [note, ...state.notes]);

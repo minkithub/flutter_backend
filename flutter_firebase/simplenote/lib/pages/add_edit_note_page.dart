@@ -25,7 +25,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
       autovalidateMode = AutovalidateMode.always;
     });
 
-    if (_formkey.currentState.validate()) return;
+    if (!_formkey.currentState.validate()) return;
 
     _formkey.currentState.save();
     final noteOwnerId = context.read<firebaseAuth.User>().uid;
