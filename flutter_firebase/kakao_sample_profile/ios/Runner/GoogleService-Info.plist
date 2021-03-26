@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>802861976737-luc08etlm7hcqe6m368oecdtkc4u49jk.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.802861976737-luc08etlm7hcqe6m368oecdtkc4u49jk</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDxbDOUJ8hBpUHyfjLHiG5C8M28rZROQH0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>802861976737</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.kakaosampleprofile</string>
+	<key>PROJECT_ID</key>
+	<string>kakao-sample-profile-e55a8</string>
+	<key>STORAGE_BUCKET</key>
+	<string>kakao-sample-profile-e55a8.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:802861976737:ios:a991ba966efceeec6a34e0</string>
+</dict>
+</plist>
