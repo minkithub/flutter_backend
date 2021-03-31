@@ -33,6 +33,7 @@ dependencies:
   cloud_firestore: ^0.16.0+1
   firebase_storage: ^7.0.0
   google_sign_in: ^4.5.9
+  get: ^3.26.0
 
 dev_dependencies:
   flutter_test:
