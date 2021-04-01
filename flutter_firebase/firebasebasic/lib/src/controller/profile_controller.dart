@@ -32,10 +32,9 @@ class ProfileController extends GetxController {
             await FirebaseUserRepository.saveUserToFirebase(myProfile.value);
         myProfile.value.docId = docId;
       } else {
-        print('docid : $docId');
-        print('myProfile.value.docId : ${myProfile.value.docId}');
-        print('myProfile.value.name : ${myProfile.value.name}');
-        FirebaseUserRepository.updateLoginTime(docId);
+        // 기존 firebaseUserdata에 정보가 담겨져 있으니 이를 myProfile에 넣어줘야함.
+        myProfile.value = firebaseUserdata;
+        FirebaseUserRepository.updateLoginTime(firebaseUserdata.docId);
       }
     }
   }
