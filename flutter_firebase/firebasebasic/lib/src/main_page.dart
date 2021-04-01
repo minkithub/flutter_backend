@@ -1,32 +1,77 @@
+import 'package:firebasebasic/src/controller/rssController.dart';
+import 'package:firebasebasic/src/screen/newsScreen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controller/profile_controller.dart';
 import 'repository/firebase_user_repository.dart';
+
+// class MainPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     RssControlleer _rssController = Get.put(RssControlleer());
+
+//     return Scaffold(
+//       appBar: AppBar(
+//           title: Text('Main Page'),
+//           backgroundColor: Colors.black,
+//           elevation: 0.0,
+//           actions: [
+//             Padding(
+//               padding: const EdgeInsets.only(right: 20),
+//               child: GestureDetector(
+//                 child: Icon(
+//                   Icons.account_circle,
+//                   color: Colors.white,
+//                 ),
+//                 onTap: () {
+//                   print('signOut');
+//                   FirebaseUserRepository.signOut();
+//                 },
+//               ),
+//             )
+//           ]),
+//       body: FutureBuilder<Object>(
+//         future: _rssController.getKmibData(),
+//         builder: (BuildContext context, AsyncSnapshot snapshot) {
+//           if (snapshot.hasData) {
+//             return NewsScreen(
+//               politicNews: snapshot.data.politic,
+//             );
+//           } else {
+//             return Center(
+//               child: CupertinoActivityIndicator(),
+//             );
+//           }
+//         },
+//       ),
+//     );
+//   }
+// }
 
 class MainPage extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Main Page'),
-          backgroundColor: Colors.black,
-          elevation: 0.0,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: GestureDetector(
-                child: Icon(
-                  Icons.account_circle,
-                  color: Colors.white,
+            title: Text('Main Page'),
+            backgroundColor: Colors.black,
+            elevation: 0.0,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: GestureDetector(
+                  child: Icon(
+                    Icons.account_circle,
+                    color: Colors.white,
+                  ),
+                  onTap: () {
+                    print('signOut');
+                    FirebaseUserRepository.signOut();
+                  },
                 ),
-                onTap: () {
-                  print('signOut');
-                  FirebaseUserRepository.signOut();
-                },
-              ),
-            )
-          ],
-        ),
+              )
+            ]),
         body: Obx(
           () => Center(
             child: Column(

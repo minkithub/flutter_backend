@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      initialRoute: '/',
       initialBinding: BindingsBuilder(() {
         Get.lazyPut<ProfileController>(() => ProfileController());
       }),
