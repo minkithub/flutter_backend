@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_sns_login/src/pages/home.dart';
+import 'package:firebase_sns_login/src/pages/app.dart';
 import 'package:flutter/material.dart';
 
-class App extends StatelessWidget {
+class FirebaseState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -14,7 +14,7 @@ class App extends StatelessWidget {
           );
         }
         if (snapshot.connectionState == ConnectionState.done) {
-          return Home();
+          return App();
         }
         return Center(
           child: CircularProgressIndicator(),
